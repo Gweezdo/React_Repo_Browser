@@ -4,14 +4,35 @@ import Header from './components/header/header.component'
 
 import './App.css';
 
-function App() {
-  return (
-    <div>  
-      <Header/>
+class App extends React.Component {
+  constructor() {
+    super();
 
-      <div>Hello World</div>
-    </div>
-  );
+    this.state = {
+      'organisation-info': {
+        'blog-url': '',
+        'git-url': '',
+        'description-url': '',
+        'location-url': '',
+        'repo-count': '',
+      },
+      'repo-info': {
+        'filtered-state': "",
+        'sort-by-state': ""
+      }
+
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <Header />
+
+        <div>Hello World</div>
+      </div>
+    );
+  }
 }
 
 export default App;

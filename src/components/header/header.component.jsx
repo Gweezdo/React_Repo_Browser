@@ -12,6 +12,7 @@ const Header = () => (
 
 		<div className="button-container">
 			<a>View Blog</a>
+			<CustomButton className="custom-button"/>
 		</div>
 
 	</div>
