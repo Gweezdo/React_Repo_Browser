@@ -9,25 +9,27 @@ class App extends React.Component {
     super();
 
     this.state = {
-      'organisation-info': {
-        'blog-url': '',
-        'git-url': '',
-        'description-url': '',
-        'location-url': '',
-        'repo-count': '',
+      organisationInfo: {
+        blogUrl: '',
+        gitUrl: '',
+        descriptionUrl: '',
+        locationUrl: '',
+        repoCount: '',
       },
-      'repo-info': {
-        'filtered-state': "",
-        'sort-by-state': ""
+      repoInfo: {
+        filteredState: "",
+        sortByState: "",
+        repoList: []
       }
 
     }
   };
 
   render() {
+    {blogUrl, gitUrl} = this.state.organisationInfo;
     return (
       <div>
-        <Header />
+        <Header {...otherProps} />
 
         <div>Hello World</div>
       </div>
