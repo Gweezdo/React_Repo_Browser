@@ -1,0 +1,53 @@
+.custom-button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color: #FFFFFF;
+	font-size: 1.8rem;
+	line-height: 2.0rem;
+	border: none;
+	border-radius: 0.8rem;
+	cursor: pointer;
+
+	&.org-btn{
+		background: #BB2025;
+		// width: 13.2rem;
+		height: 3.6rem;
+		padding: 0 1.5rem 0 1.0rem;
+	}
+	
+	&.repo-btn{
+		height: 3.6rem;
+		background: #1154BE;
+		padding: 0 1.5rem 0 1.0rem;
+    // width: 12.0rem;
+	}
+	
+	.git-icon{
+		width: 3.4rem;
+		height: 2.4rem;
+		// top: calc(50% - 2.4rem/2);
+    // padding: 0 0.5rem 0 0;
+	}
+	
+	&.nav-btn{
+		width: 8.5rem;
+		height: 3.6rem;
+		background: #646464;
+		padding: 0 1.0rem 0 1.5rem;
+	}
+
+	&.nav-btn-right{
+		flex-direction: row-reverse;
+
+		.next-page-icon{
+			width: 3.0rem;
+			height: 5.0rem;
+			// margin-left: 10px;
+		}
+	}
+
+	
+
+};
