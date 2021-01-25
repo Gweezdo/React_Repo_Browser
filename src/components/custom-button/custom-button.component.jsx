@@ -11,37 +11,28 @@ import { ReactComponent as LastPageIcon } from '../../assets/last-page-icon_24px
 
 const iconToRender = (icon) => {
 	switch (icon) {
-		case "orgBtn":
-		case "repoBtn":
-			return <GitIcon className="git-icon"/>;
-		case "navBtnFirst":
-			return <FirstPageIcon className="first-page-icon" />;
-		case "navBtnPrev":
-			return <PrevPageIcon className="prev-page-icon" />;
-		case "navBtnNext":
-			return <NextPageIcon className="next-page-icon" />;
-		case "navBtnLast":
-			return <LastPageIcon className="last-page-icon" />;
-		default:
-			return;	
-	} 
+    case "org-btn":
+    case "repo-btn":
+      return <GitIcon className="git-icon" />;
+    case "nav-btn nav-btn-first":
+      return <FirstPageIcon className="nav-icon" />;
+    case "nav-btn nav-btn-prev":
+      return <PrevPageIcon className="nav-icon" />;
+    case "nav-btn nav-btn-next":
+      return <NextPageIcon className="nav-icon" />;
+    case "nav-btn nav-btn-last":
+      return <LastPageIcon className="nav-icon" />;
+    default:
+      return;
+  } 
 }
 
-const CustomButton = ({
-  iconSwitch,
-  orgBtn,
-  repoBtn,
-  navBtn,
-  navBtnRight,
-  children,
-}) => (
+const CustomButton = ({ className, children, ...buttonProps }) => (
   <button
-    className={`${orgBtn ? "org-btn" : ""} 
-			${repoBtn ? "repo-btn" : ""} 
-			${navBtn ? "nav-btn" : ""} 
-			${navBtnRight ? "nav-btn-right" : ""} custom-button`}
+		className={`${className} custom-button`}
+		{...buttonProps}
   >
-    {iconToRender(iconSwitch)}
+    {iconToRender(className)}
     {children}
   </button>
 );

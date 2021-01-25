@@ -9,12 +9,14 @@
 	border: none;
 	border-radius: 0.8rem;
 	cursor: pointer;
-
+	outline: none;
+	
+	
 	&.org-btn{
 		background: #BB2025;
 		// width: 13.2rem;
 		height: 3.6rem;
-		padding: 0 1.5rem 0 1.0rem;
+		padding: 0 2.5rem 0 2.0rem;
 	}
 	
 	&.repo-btn{
@@ -36,18 +38,22 @@
 		height: 3.6rem;
 		background: #646464;
 		padding: 0 1.0rem 0 1.5rem;
-	}
+		
+		&.nav-btn-first{
+			
+			.nav-icon-first{
+				width: 5.0rem;
+				height: 5.0rem;
+				// margin-left: 10px;
+			}
+		}
 
-	&.nav-btn-right{
-		flex-direction: row-reverse;
-
-		.next-page-icon{
-			width: 3.0rem;
-			height: 5.0rem;
-			// margin-left: 10px;
+		&.nav-btn-next, &.nav-btn-last{
+			flex-direction: row-reverse;
 		}
 	}
-
+	
+	
 	
 
 };

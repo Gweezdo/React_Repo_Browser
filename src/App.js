@@ -1,6 +1,8 @@
 import React from 'react';
 
-import Header from './components/header/header.component'
+import Header from './components/header/header.component';
+import OrgSection from './sections/organisation/organisation.component';
+import RepoSection from './sections/repositories/repositories.component'
 
 import './App.css';
 
@@ -10,6 +12,7 @@ class App extends React.Component {
 
     this.state = {
       organisationInfo: {
+        id: null,
         blogUrl: "",
         orgGitUrl: "",
         orgName: "",
@@ -18,9 +21,8 @@ class App extends React.Component {
         orgRepoCount: null,
       },
       repoInfo: {
-        filteredState: "",
+        filteredState: "All",
         sortByState: "",
-        repoList: []
       }
     }
   };
@@ -33,30 +35,18 @@ class App extends React.Component {
         throw Error(orgResponce.statusText);
       }else{
         const orgInfo = await orgResponce.json();
+        this.setState({ id: orgInfo.id });
         this.setState({ blogUrl: orgInfo.blog });
         this.setState({ orgGitUrl: orgInfo.html_url });
         this.setState({ orgName: orgInfo.name });
         this.setState({ orgDescription: orgInfo.description });
         this.setState({ orgLocation: orgInfo.location });
         this.setState({ orgRepoCount: orgInfo.public_repos });
-        console.log(this.state.blogUrl)
       }
     }catch (error) {
       console.log("Fetch to catalyst ORGANISATION api errored out!")
     }
     
-    //Fetching all repository data
-    try{
-      const repoResponce = await fetch("https://api.github.com/orgs/catalyst/repos");
-      if(!repoResponce.ok){
-        throw Error(repoResponce.statusText);
-      }else{
-        const repoInfo = await repoResponce.json();
-        this.setState({ repoList: repoInfo });
-      }
-    }catch (error){
-      console.log("Fetch to catalyst REPOSITORY api errored out!")
-    }
   };
 
   render() {
@@ -64,8 +54,12 @@ class App extends React.Component {
     return (
       <div>
         <Header blogUrl={this.state.blogUrl} orgGitUrl={this.state.orgGitUrl} />
-
-      
+        <OrgSection
+          orgDescription={this.state.orgDescription}
+          orgLocation={this.state.orgLocation}
+          orgRepoCount={this.state.orgRepoCount}
+        />
+        <RepoSection/>
       </div>
     );
   }
