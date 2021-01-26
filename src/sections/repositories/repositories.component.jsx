@@ -15,20 +15,7 @@ class RepoSection extends React.Component {
 
   async componentDidMount() {
     //Fetching all repository data
-    try {
-      const repoResponce = await fetch(
-        "https://api.github.com/orgs/catalyst/repos"
-      );
-      if (!repoResponce.ok) {
-        throw Error(repoResponce.statusText);
-      } else {
-        const repoInfo = await repoResponce.json();
-        this.setState({ repoList: repoInfo });
-        console.log(this.state.repoList);
-      }
-    } catch (error) {
-      console.log("Fetch to catalyst REPOSITORY api errored out!");
-    }
+  
   }
   
   render() {

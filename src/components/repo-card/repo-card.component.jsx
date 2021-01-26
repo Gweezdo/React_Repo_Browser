@@ -34,7 +34,7 @@ const RepoCard = (props) => {
               <ShowMoreIcon className="show-more-icon" />
               <span className="show-text">Show more</span>
             </div>
-            <CustomButton className="repo-btn" />
+            <CustomButton className="repo-btn">VIEW</CustomButton>
           </div>
         </div>
       </div>
@@ -83,7 +83,14 @@ const RepoCard = (props) => {
 					</div>
 					
 					<div className="contributor-stats">
-						
+            <h6 className="contributor-title">Top Contributors:</h6>
+            <ul className="contributor-list">
+            <li className="contr1"></li>
+            <li className="contr2"></li>
+            <li className="contr3"></li>
+            <li className="contr4"></li>
+            <li className="contr5"></li>
+            </ul>
 					</div>
         </div>
       </div>

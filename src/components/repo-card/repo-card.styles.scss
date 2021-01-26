@@ -1,0 +1,147 @@
+.repo-card {
+  width: 81.4rem;
+  border-radius: 1rem;
+  background: #fbfbfb;
+  border: 0.1rem solid #d9d7d8;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1), 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+  .top-section {
+    padding: 2rem 2rem;
+
+    .repo-title {
+      font-size: 3rem;
+      line-height: 4.8rem;
+    }
+
+    .repo-description {
+      font-size: 1.8rem;
+      line-height: 2.1rem;
+    }
+
+    .btm-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3rem 0 0rem 0;
+
+      .btm-left-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+
+        .update-text {
+          font-size: 1.4rem;
+          line-height: 2.2rem;
+          color: #4f4f4f;
+        }
+
+        .fork-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: left;
+
+          .fork-separator,
+          .fork-info {
+            font-size: 1.4rem;
+            line-height: 2.2rem;
+            color: #4f4f4f;
+            padding: 0 0.8rem;
+          }
+
+          .forked-icon {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+
+      .btm-right-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .show-info {
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          height: 2rem;
+
+          .show-more-icon {
+            position: relative;
+            width: 2rem;
+            height: 2rem;
+            transform: rotate(0deg);
+            /* background: red; */
+          }
+
+          .show-text {
+            font-size: 1.4rem;
+            line-height: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  .btm-section {
+    padding: 0rem 2rem 2rem 2rem;
+    display: none;
+
+    .line {
+      position: relative;
+    }
+
+    .repo-info-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 1rem;
+
+      .repo-stats {
+        width: 40rem;
+
+        .stats-title {
+          font-size: 1.8rem;
+          line-height: 2.9rem;
+          color: #3d3c3c;
+          text-align: center;
+        }
+
+        .stats-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding-top: 1rem;
+
+          .stats-left {
+            display: block;
+            /* background:lightcoral; */
+
+            .stat-flex {
+              display: flex;
+
+              .stat-icon {
+                width: 2rem;
+                height: 2rem;
+                padding: 0.25rem 0.5rem;
+              }
+              .stat-text {
+								position: relative;
+                font-size: 1.4rem;
+                line-height: 2rem;
+                padding: 0.25rem 0rem;
+              }
+            }
+					}
+					
+					.stat-right{
+						
+					}
+        }
+      }
+    }
+  }
+}
