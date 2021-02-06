@@ -1,4 +1,4 @@
-export const fetchedRepos = (repoData) => ({
+export const fetchedReposSucceeded = (repoData) => ({
 	type: "FETCHED_REPOS_SUCCEEDED",
 	payload: repoData
 });
