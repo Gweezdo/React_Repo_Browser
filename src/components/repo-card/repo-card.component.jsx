@@ -12,23 +12,40 @@ import { ReactComponent as IssueIcon } from "../../assets/issues-icon_20px.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/calendar-icon_20px.svg";
 
 import CustomButton from '../../components/custom-button/custom-button.component';
-// import GetContributors from '../../components/contributors/contributors.component';
+import GetContributors from '../../components/contributors/contributors.component';
+// import { useSelector } from "react-redux";
+
+const licenseHandeler = (props) => {
+  if(props.license === null){
+    return <span className="stat-text">License: No License</span>
+  }else if (props.license){
+    return <span className="stat-text">License: {props.license.name}</span>
+  }
+}
+
+const getContributors = async (props) =>{
+  const responce = await fetch(props.contributors_url);
+  const result = await responce.json();
+
+  console.log(result[0].login)
+  // console.log(props.contributors_url);
+}
 
 
-const RepoCard = (repo) => {
-  // const {repoData} = this.props
-	return (
+
+const RepoCard = (props) => {
+  return (
     <div className="repo-card">
       <div className="top-section">
-        <h4 className="repo-title">{repo.name}</h4>
-        <h5 className="repo-description">{repo.description}</h5>
+        <h4 className="repo-title">{props.name}</h4>
+        <h5 className="repo-description">{props.description}</h5>
         <div className="btm-container">
           <div className="btm-left-container">
-            <span className="update-text">Updated: {repo.time}</span>
+            <span className="update-text">Updated: {props.updated_at}</span>
             <div className="fork-container">
               <span className="fork-separator">|</span>
               <ForkIcon className="forked-icon" />
-              <span className="fork-info">Forked from: {repo.forked}...</span>
+              <span className="fork-info">Forked: {props.fork}</span>
             </div>
           </div>
           <div className="btm-right-container">
@@ -49,44 +66,57 @@ const RepoCard = (repo) => {
               <div className="stats-left">
                 <div className="stat-flex">
                   <StarIcon className="stat-icon" />
-                  <span className="stat-text">Stargazers</span>
+                  <span className="stat-text">
+                    Stargazers: {props.stargazers_count}
+                  </span>
                 </div>
                 <div className="stat-flex">
                   <WatchIcon className="stat-icon" />
-                  <span className="stat-text">Watchers</span>
+                  <span className="stat-text">
+                    Watchers: {props.watchers_count}
+                  </span>
                 </div>
                 <div className="stat-flex">
                   <LanguageIcon className="stat-icon" />
-                  <span className="stat-text">{repo.language}</span>
+                  <span className="stat-text">Language: {props.language}</span>
                 </div>
                 <div className="stat-flex">
                   <LicenseIcon className="stat-icon" />
-                  <span className="stat-text">{repo.license}</span>
+                  {
+                    licenseHandeler(props)
+                  }
+                  
                 </div>
               </div>
 
               <div className="stats-right">
                 <div className="stat-flex">
                   <ForkIcon className="stat-icon" />
-                  <span className="stat-text">{repo.fork}</span>
+                  <span className="stat-text">Forks: {props.fork}</span>
                 </div>
                 <div className="stat-flex">
                   <IssueIcon className="stat-icon" />
-                  <span className="stat-text">{repo.issues}</span>
+                  <span className="stat-text">Issues: {props.open_issues}</span>
                 </div>
                 <div className="stat-flex">
                   <CalendarIcon className="stat-icon" />
-                  <span className="stat-text">function({repo.time})</span>
+                  <span className="stat-text">function</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+      </div>
+      </div>
+      // {
+      //   getContributors(props)
+      // }
+      // <GetContributors url={props.contributors_url} />
+      
 
-          </div>
-          </div>
-          </div>
-          // <GetContributors url={repo.contributors_url} />
   );
-}
+};
 
 export default RepoCard;

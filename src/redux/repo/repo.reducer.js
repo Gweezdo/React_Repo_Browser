@@ -1,7 +1,11 @@
 import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
-  repoData: [],
+  repoData: [
+    {
+      id:1,
+    }
+  ],
   currentPageNo: null,
   repoPageIndexStart: null,
   repoPageIndexEnd: null,
@@ -9,7 +13,9 @@ const INITIAL_STATE = {
   firstButtonIsActive: false,
   lastButtonIsActive: true,
   filterReposBy: "All",
+  filterReposByUrl: "all",
   sortReposBy: "Created Time (New to Old)",
+  sortReposByUrl: "sort=created&direction=desc",
   filterHidden: false,
   sortbyHidden: false,
 };
@@ -40,10 +46,22 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         filterReposBy: action.payload,
       };
 
+    case RepoActionTypes.FILTER_REPOS_BY_URL:
+      return {
+        ...state,
+        filterReposByUrl: action.payload,
+      };
+
     case RepoActionTypes.SORT_REPOS_BY:
       return {
         ...state,
         sortReposBy: action.payload,
+      };
+
+    case RepoActionTypes.SORT_REPOS_BY_URL:
+      return {
+        ...state,
+        sortReposByUrl: action.payload,
       };
 
     case RepoActionTypes.FIRST_PAGE_DISPLAYED:
