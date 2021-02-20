@@ -17,7 +17,7 @@ class OrgSection extends React.Component {
         throw Error(orgResponce.statusText);
       } else {
         const orgInfo = await orgResponce.json();
-        // console.log(orgInfo.headers);
+        // console.log("orgInfo.headers: " + orgInfo.headers);
         console.log("orgInfo fetched");
         this.props.fetchedOrgData(orgInfo);
       }
@@ -49,7 +49,7 @@ class OrgSection extends React.Component {
             <Dropdown
               className="sort-dropdown"
               title={"Sort By"} 
-              content={["Created Time (New to Old)", "Created Time (Old to New", "Full Name (A - Z)", "Full Name (Z - A)", "Updated Time (New to Old", "Updated Time (Old to New"]} 
+              content={["Created Time (New to Old)", "Created Time (Old to New)", "Full Name (A - Z)", "Full Name (Z - A)", "Updated Time (New to Old)", "Updated Time (Old to New)"]} 
               toggleHidden={sortbyHidden} 
               type={"SortBy"}
             ></Dropdown>

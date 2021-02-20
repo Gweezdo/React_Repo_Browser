@@ -1,0 +1,16 @@
+Append the following to the URL and perform an asyncronous request
+
+Filter By:
+
+*All = type=all
+*Forked = type=forks
+*Not forked = type=sources
+
+Sort By:
+
+*Full Name (A-Z) = sort=full_name&direction=desc
+*Full Name (Z-A) = sort=full_name&direction=asc
+*Created Time (asc) = sort=created&direction=asc
+*Created Time (desc) = sort=created&direction=desc
+*Updated Time (asc) = sort=updated&direction=asc
+*Updated Time (desc) = sort=updated&direction=desc
