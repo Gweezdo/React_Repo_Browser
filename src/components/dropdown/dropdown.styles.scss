@@ -3,7 +3,7 @@
 	flex-direction: column;
 	padding: 1.6rem 1.6rem;
 
-	&:first-child{
+	.dropdown-title{
 		// position: relative;
 		font-size: 1.4rem;
     line-height: 2.2rem;
@@ -19,6 +19,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		min-width: 13.6rem;
     height: 4.3rem;
     border: 0.2rem solid #696969;
     cursor: pointer;
@@ -57,6 +58,7 @@
     // border-bottom-left-radius: 0.8rem;
     // border-bottom-right-radius: 0.8rem;
 		background: #FFFFFF;
+		z-index: 10;
 		
 		.item{
 			padding: 0.2rem 1.0rem;

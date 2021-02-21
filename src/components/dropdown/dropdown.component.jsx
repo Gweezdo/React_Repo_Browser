@@ -29,7 +29,7 @@ const Dropdown = ({title, content, toggleHidden, type}) => {
 
 	return (
     <div className="container">
-      <span>{title}</span>
+      <span className="dropdown-title">{title}</span>
       <button className="dropdown-btn" onClick={dropdownActionDispatch}>
         <span>
           {type === "Filter"
