@@ -81,7 +81,7 @@ async function getContributors(props) {
           break;
         }
       }
-      console.log(cont_list)
+      // console.log(cont_list)
       return cont_list;
     }
   } catch (error) {
@@ -92,7 +92,7 @@ async function getContributors(props) {
 
 
 const RepoCard = (props) => {
-  // var templist = await getContributors(props);
+
   return (
     <div className="repo-card">
       <div className="top-section">
@@ -167,15 +167,16 @@ const RepoCard = (props) => {
           </div>
          
             {
-            
-             <GetContributors list={getContributors(props)} />
-            
+              
+              <GetContributors list={getContributors(props)} />
 
+              
+              
             }
-          
-          </div>
-          </div>
-          </div>
+            
+            </div>
+            </div>
+            </div>
   );
 };
 
