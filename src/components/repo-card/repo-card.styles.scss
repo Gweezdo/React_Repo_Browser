@@ -104,6 +104,7 @@
       flex-direction: row;
       justify-content: space-between;
       padding-top: 1rem;
+      // display: none;
 
       .repo-stats {
         width: 40rem;
@@ -121,7 +122,7 @@
           justify-content: space-between;
           padding-top: 1rem;
 
-          .stats-left {
+          .stats-left, .stats-right{
             display: block;
             /* background:lightcoral; */
 
@@ -142,9 +143,7 @@
             }
 					}
 					
-					.stat-right{
-						
-					}
+					
         }
       }
     }

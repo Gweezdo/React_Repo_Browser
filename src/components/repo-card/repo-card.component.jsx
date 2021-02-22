@@ -25,16 +25,16 @@ const licenseHandeler = (props) => {
 
 const forkedHandeler = (props) => {
   if(props.fork){
-    return <span className="fork-info">Forked: Yes</span>;
+    return 'Yes'
   } else{
-    return <span className="fork-info">Forked: No</span>;
+    return 'No'
   }
 }
 
 
 const minsOrHrs = (minutes, hours) => {
   if (minutes < 10 && hours < 10) {
-    let mins_hrs = "0" + hours.toString() + ":" + "0" + minutes.toString();
+    let mins_hrs = "0" + hours.toString() + ": 0" + minutes.toString();
     return mins_hrs;
   }
   if (hours < 10) {
@@ -42,7 +42,7 @@ const minsOrHrs = (minutes, hours) => {
     return mins_hrs;
   }
   if (minutes < 10) {
-    let mins_hrs = hours.toString() + ":" + "0" + minutes.toString();
+    let mins_hrs = hours.toString() + ": 0" + minutes.toString();
     return mins_hrs;
   }
   let mins_hrs = hours.toString() + ":" + minutes.toString();
@@ -64,17 +64,35 @@ const timeHandeler = (time) => {
   )}`;
   
 }
-const getContributors = async (props) =>{
-  const responce = await fetch(props.contributors_url);
-  const result = await responce.json();
-
-  console.log(result[0].login)
-  // console.log(props.contributors_url);
+async function getContributors(props) {
+  try {
+    const responce = await fetch(props.contributors_url);
+    const cont_list = [];
+    
+    if (!responce.ok) {
+      throw Error(responce.statusText);
+    } else {
+      const result = await responce.json();
+      for (var i = 0; i < result.length; i++) {
+        var temp = result[i].login;
+        cont_list.push(temp);
+        // console.log(`cont${i} ${temp}`);
+        if (i === 4) {
+          break;
+        }
+      }
+      console.log(cont_list)
+      return cont_list;
+    }
+  } catch (error) {
+    console.log("Fetch to catalyst Contributors api errored out!");
+  }
 }
 
 
 
 const RepoCard = (props) => {
+  // var templist = await getContributors(props);
   return (
     <div className="repo-card">
       <div className="top-section">
@@ -88,7 +106,7 @@ const RepoCard = (props) => {
             <div className="fork-container">
               <span className="fork-separator">|</span>
               <ForkIcon className="forked-icon" />
-              {forkedHandeler(props)}
+              <span className="fork-info">Forked: {forkedHandeler(props)}</span>
             </div>
           </div>
           <div className="btm-right-container">
@@ -132,7 +150,7 @@ const RepoCard = (props) => {
               <div className="stats-right">
                 <div className="stat-flex">
                   <ForkIcon className="stat-icon" />
-                  <span className="stat-text">Forks: {props.fork}</span>
+                  <span className="stat-text">Forks: {props.forks_count}</span>
                 </div>
                 <div className="stat-flex">
                   <IssueIcon className="stat-icon" />
@@ -147,14 +165,17 @@ const RepoCard = (props) => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div></div>
-    </div>
-    // {
-    //   getContributors(props)
-    // }
-    // <GetContributors url={props.contributors_url} />
+         
+            {
+            
+             <GetContributors list={getContributors(props)} />
+            
+
+            }
+          
+          </div>
+          </div>
+          </div>
   );
 };
 
