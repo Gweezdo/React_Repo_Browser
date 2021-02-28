@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ReactComponent as FilterSortIcon } from '../../assets/filter-sort-icon_24px.svg'; 
+//imported actions
 import {
   toggleFilterDropdownHidden,
   filterReposBy,
@@ -9,6 +10,7 @@ import {
   sortReposBy,
   sortReposByUrl,
 } from "../../redux/repo/repo.actions";
+
 import { useSelector } from "react-redux";
 import store from '../../redux/store';
 
@@ -24,8 +26,6 @@ const Dropdown = ({title, content, toggleHidden, type}) => {
       store.dispatch(toggleSortbyDropdownHidden());
     }
   }
-
-
 
 	return (
     <div className="container">
@@ -44,17 +44,18 @@ const Dropdown = ({title, content, toggleHidden, type}) => {
         <div className="dropdown-content">
           {content.map((item, index) => (
             <span
+              key={index}
               className="item"
-              id={index}
               onClick={() => {
                 if (type === "Filter") {
                   store.dispatch(filterReposBy(item));
                   store.dispatch(filterReposByUrl(item));
                   store.dispatch(toggleFilterDropdownHidden());
-                } else if (type === "SortBy") {
-                  store.dispatch(sortReposBy(item));
-                  store.dispatch(sortReposByUrl(item));
-                  store.dispatch(toggleSortbyDropdownHidden());
+                    
+                  } else if (type === "SortBy") {
+                    store.dispatch(sortReposBy(item));
+                    store.dispatch(sortReposByUrl(item));
+                    store.dispatch(toggleSortbyDropdownHidden());
                 }
               }}
             >

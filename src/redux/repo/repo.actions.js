@@ -1,8 +1,54 @@
+import axios from 'axios';
 import { RepoActionTypes } from './repo.types';
 
-export const fetchedReposSucceeded = (repoData) => ({
-  type: RepoActionTypes.FETCHED_REPOS_SUCCEEDED,
-  payload: repoData,
+export const fetchReposAsync = (filterReposByUrl, sortReposByUrl) => {
+  return dispatch => {
+    dispatch(fetchReposPending())
+
+    const url = `https://api.github.com/orgs/catalyst/repos?client_id=2aa40990e1a443df17b4&client_secret=2bcb7c4c2b2791ab42691e123e847002b14400fb?page=1&per_page=30&${filterReposByUrl}&${sortReposByUrl}`;
+    axios
+      .get(url)
+      .then((res) => {
+        let list = [];
+        let results = res.data;
+
+        for (var i = 0; i < results.length; i++) {
+          list.push({
+            id: results[i].id,
+            name: results[i].name,
+            full_name: results[i].full_name,
+            html_url: results[i].html_url,
+            description: results[i].description,
+            fork: results[i].fork,
+            contributors_url: results[i].contributors_url,
+            created_at: results[i].created_at,
+            updated_at: results[i].updated_at,
+            stargazers_count: results[i].stargazers_count,
+            watchers_count: results[i].watchers_count,
+            language: results[i].language,
+            forks_count: results[i].forks_count,
+            license: results[i].license, // or null if no license
+            open_issues: results[i].open_issues,
+          });
+        }
+        dispatch(fetchReposFulfilled(list))
+      })
+        .catch((error) => dispatch(fetchReposRejected(error)));
+  }
+};
+
+export const fetchReposPending = () => ({
+  type: RepoActionTypes.FETCH_REPOS_PENDING,
+});
+
+export const fetchReposFulfilled = (data) => ({
+  type: RepoActionTypes.FETCH_REPOS_FULFILLED,
+  payload: data
+});
+
+export const fetchReposRejected = (error) => ({
+  type: RepoActionTypes.FETCH_REPOS_REJECTED,
+  payload: error
 });
 
 export const toggleFilterDropdownHidden = () => ({
@@ -61,12 +107,12 @@ export const sortReposByUrl = (item) => {
     case "Full Name (A - Z)":
       return {
         type: type,
-        payload: "sort=full_name&direction=desc",
+        payload: "sort=full_name&direction=asc",
       };
     case "Full Name (Z - A)":
       return {
         type: type,
-        payload: "sort=full_name&direction=asc",
+        payload: "sort=full_name&direction=desc",
       };
     case "Updated Time (New to Old)":
       return {

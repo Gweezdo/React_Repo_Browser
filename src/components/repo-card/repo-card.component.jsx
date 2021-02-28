@@ -12,7 +12,7 @@ import { ReactComponent as IssueIcon } from "../../assets/issues-icon_20px.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/calendar-icon_20px.svg";
 
 import CustomButton from '../../components/custom-button/custom-button.component';
-import GetContributors from '../../components/contributors/contributors.component';
+// import GetContributors from '../../components/contributors/contributors.component';
 // import { useSelector } from "react-redux";
 
 const licenseHandeler = (props) => {
@@ -64,30 +64,30 @@ const timeHandeler = (time) => {
   )}`;
   
 }
-async function getContributors(props) {
-  try {
-    const responce = await fetch(props.contributors_url);
-    const cont_list = [];
+// async function getContributors(props) {
+//   try {
+//     const responce = await fetch(props.contributors_url);
+//     const cont_list = [];
     
-    if (!responce.ok) {
-      throw Error(responce.statusText);
-    } else {
-      const result = await responce.json();
-      for (var i = 0; i < result.length; i++) {
-        var temp = result[i].login;
-        cont_list.push(temp);
-        // console.log(`cont${i} ${temp}`);
-        if (i === 4) {
-          break;
-        }
-      }
-      // console.log(cont_list)
-      return cont_list;
-    }
-  } catch (error) {
-    console.log("Fetch to catalyst Contributors api errored out!");
-  }
-}
+//     if (!responce.ok) {
+//       throw Error(responce.statusText);
+//     } else {
+//       const result = await responce.json();
+//       for (var i = 0; i < result.length; i++) {
+//         var temp = result[i].login;
+//         cont_list.push(temp);
+//         // console.log(`cont${i} ${temp}`);
+//         if (i === 4) {
+//           break;
+//         }
+//       }
+//       // console.log(cont_list)
+//       return cont_list;
+//     }
+//   } catch (error) {
+//     console.log("Fetch to catalyst Contributors api errored out!");
+//   }
+// }
 
 
 
@@ -168,8 +168,7 @@ const RepoCard = (props) => {
          
             {
               
-              <GetContributors list={getContributors(props)} />
-
+              
               
               
             }
@@ -177,6 +176,7 @@ const RepoCard = (props) => {
             </div>
             </div>
             </div>
+            // <GetContributors list={getContributors(props)} />
   );
 };
 

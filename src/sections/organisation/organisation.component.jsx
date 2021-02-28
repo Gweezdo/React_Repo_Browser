@@ -27,7 +27,10 @@ class OrgSection extends React.Component {
   }
 
   render() {
-    const { filterHidden, sortbyHidden } = this.props.repos;
+    const {
+      filterHidden,
+      sortbyHidden,
+    } = this.props.repos;
     const { orgDescription, orgLocation, orgRepoCount } = this.props.orgs;
     return (
       <div className="org-section">
@@ -48,9 +51,16 @@ class OrgSection extends React.Component {
 
             <Dropdown
               className="sort-dropdown"
-              title={"Sort By"} 
-              content={["Created Time (New to Old)", "Created Time (Old to New)", "Full Name (A - Z)", "Full Name (Z - A)", "Updated Time (New to Old)", "Updated Time (Old to New)"]} 
-              toggleHidden={sortbyHidden} 
+              title={"Sort By"}
+              content={[
+                "Created Time (New to Old)",
+                "Created Time (Old to New)",
+                "Full Name (A - Z)",
+                "Full Name (Z - A)",
+                "Updated Time (New to Old)",
+                "Updated Time (Old to New)",
+              ]}
+              toggleHidden={sortbyHidden}
               type={"SortBy"}
             ></Dropdown>
           </div>

@@ -1,11 +1,10 @@
 import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
-  repoData: [
-    {
-      id:1,
-    }
-  ],
+  fetching: false,
+  fetched: false,
+  error: null,
+  repoData: [],
   currentPageNo: null,
   repoPageIndexStart: null,
   repoPageIndexEnd: null,
@@ -22,11 +21,27 @@ const INITIAL_STATE = {
 
 const repoReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case RepoActionTypes.FETCHED_REPOS_SUCCEEDED:
+
+    case RepoActionTypes.FETCH_REPOS_PENDING:
+      return{
+        ...state,
+        fetching: true,
+      };
+      
+    case RepoActionTypes.FETCH_REPOS_FULFILLED:
       return {
         ...state,
+        fetching: false,
+        fetched: true,
         repoData: action.payload,
       };
+    
+    case RepoActionTypes.FETCH_REPOS_REJECTED:
+      return {
+        ...state,
+        fetching: false,
+        error: action.payload,
+      }  
 
     case RepoActionTypes.TOGGLE_FILTER_DROPDOWN_HIDDEN:
       return {
