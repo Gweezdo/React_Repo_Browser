@@ -11,7 +11,7 @@ class OrgSection extends React.Component {
   async componentDidMount() {
     try {
       const orgResponce = await fetch(
-        "https://api.github.com/orgs/catalyst?client_id=2aa40990e1a443df17b4&client_secret=2bcb7c4c2b2791ab42691e123e847002b14400fb"
+        "https://api.github.com/orgs/catalyst?access_token=78ffc5da66b7ea9369c88a2762fe9eb71c7fca1b"
       );
       if (!orgResponce.ok) {
         throw Error(orgResponce.statusText);

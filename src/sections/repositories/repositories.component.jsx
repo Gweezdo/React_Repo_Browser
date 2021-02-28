@@ -6,7 +6,7 @@ import RepoCard from "../../components/repo-card/repo-card.component";
 import "./repositories.styles.scss";
 
 //imported actions
-import { fetchReposAsync } from "../../redux/repo/repo.actions";
+import { fetchReposAsync, fetchContAsync } from "../../redux/repo/repo.actions";
 
 
 class RepoSection extends React.Component {
@@ -24,14 +24,14 @@ class RepoSection extends React.Component {
     if (prevProps.repos.sortReposByUrl !== sortReposByUrl) {
       this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl);
     }
+    if (prevProps.repos.repoData.length >1) {
+      this.props.fetchContAsync(this.props.repos.repoData);
+    }
+
   }
 
   render() {
     const { repoData } = this.props.repos;
-    // this.props.fetchReposAsync(
-    //   this.props.repos.filterReposByUrl,
-    //   this.props.repos.sortReposByUrl
-    // );
 
     return (
       <div className="repo-section">
@@ -39,18 +39,6 @@ class RepoSection extends React.Component {
           <RepoCard
             key={repo.id}
             {...repo}
-            // name={repo.name}
-            // description={repo.description}
-            // updated_at={repo.updated_at}
-            // fork={repo.fork}
-            // created_at={repo.created_at}
-            // stargazers_count={repo.stargazers_count}
-            // watchers_count={repo.watchers_count}
-            // language={repo.language}
-            // forks_count={repo.forks_count}
-            // license={repo.license}
-            // open_issues={repo.open_issues}
-            // contributors_url={repo.contributors_url}
           />
         ))}
       </div>
@@ -66,6 +54,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchReposAsync: (filterReposByUrl, sortReposByUrl) =>
     dispatch(fetchReposAsync(filterReposByUrl, sortReposByUrl)),
+  fetchContAsync: (repoData) => dispatch(fetchContAsync(repoData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoSection);
