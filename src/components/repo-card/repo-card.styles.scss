@@ -146,6 +146,28 @@
 					
         }
       }
+
+      .contributor-stats {
+        width: 30rem;
+
+        .contributor-title {
+          font-size: 1.8rem;
+          line-height: 2.9rem;
+          color: #3d3c3c;
+          text-align: center;
+          // background: yellow;
+        }
+        
+        .contributor-list {
+          // background-color: blue;
+          .contr{
+            // color: red;
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+          }
+        }
+
+      }
     }
   }
 }

@@ -4,8 +4,7 @@ import { RepoActionTypes } from './repo.types';
 export const fetchReposAsync = (filterReposByUrl, sortReposByUrl) => {
   return dispatch => {
     dispatch(fetchReposPending());
-    //access_token=78ffc5da66b7ea9369c88a2762fe9eb71c7fca1b
-    const url = `https://api.github.com/orgs/catalyst/repos?client_id=2aa40990e1a443df17b4&client_secret=a6bd18121a97d7df05f31a1734702aa2e3a8a3fd&page=1&per_page=30&${filterReposByUrl}&${sortReposByUrl}&`;
+    const url = `https://api.github.com/orgs/catalyst/repos?access_token=26fc0562eb44eac198849d4557d9064c906607d9&page=1&per_page=8&${filterReposByUrl}&${sortReposByUrl}`;
     axios
       .get(url)
       .then((res) => {
@@ -70,48 +69,6 @@ export const fetchReposRejected = (error) => ({
   type: RepoActionTypes.FETCH_REPOS_REJECTED,
   payload: error
 });
-
-// export const fetchContAsync = (repoData) => {
-//   return dispatch => {
-//     dispatch(fetchContPending())
-//     const cont_list = [];
-
-//     for(var i=0; i<repoData.length; i++){
-      
-//       axios
-//         .get(repoData[i].contributors_url)
-//         .then((res) => {
-//           var temp_list = [];
-//           for (var j = 0; j < res.data.length; j++) {
-//             temp_list.push(res.data[j].login);
-//             if (j === 4) {
-//               break;
-//             }
-//           }
-//           cont_list.push(temp_list);
-//         })
-//         .catch((error) => dispatch(fetchContRejected(error)));
-//       }
-//       dispatch(fetchContFulfilled(cont_list))
-//     }
-
-//   }
-
-// export const fetchContPending = () => ({
-//   type: RepoActionTypes.FETCH_CONTRIBUTORS_PENDING,
-// });
-
-// export const fetchContFulfilled = (data) => ({
-//   type: RepoActionTypes.FETCH_CONTRIBUTORS_FULFILLED,
-//   payload: data,
-// });
-
-// export const fetchContRejected = (error) => ({
-//   type: RepoActionTypes.FETCH_CONTRIBUTORS_REJECTED,
-//   payload: error,
-// });
-
-
 
 export const toggleFilterDropdownHidden = () => ({
   type: RepoActionTypes.TOGGLE_FILTER_DROPDOWN_HIDDEN,

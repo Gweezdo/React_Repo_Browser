@@ -1,0 +1,28 @@
+.nav-footer{
+	position: fixed;
+	width: 100%;
+	height: 6rem;
+	// background: peachpuff;
+	// left: calc(50% - 50rem/2);
+	// z-index: 199;
+	bottom: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+	.navigation-container{
+		width: 40rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		background: white;
+		border: 1px solid #282828;
+		border-radius: 1rem;
+		padding: 1rem 2rem;
+
+
+
+	}
+
+}

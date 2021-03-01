@@ -11,7 +11,7 @@ class OrgSection extends React.Component {
   async componentDidMount() {
     try {
       const orgResponce = await fetch(
-        "https://api.github.com/orgs/catalyst?client_id=2aa40990e1a443df17b4&client_secret=a6bd18121a97d7df05f31a1734702aa2e3a8a3fd"
+        "https://api.github.com/orgs/catalyst?&access_token=26fc0562eb44eac198849d4557d9064c906607d9"
       );
       if (!orgResponce.ok) {
         throw Error(orgResponce.statusText);
@@ -80,3 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrgSection);
+ 

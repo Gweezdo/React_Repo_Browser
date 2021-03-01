@@ -5,10 +5,6 @@ const INITIAL_STATE = {
   fetched: false,
   error: null,
   repoData: [],
-  cont_fetching: false,
-  cont_fetched: false,
-  cont_error: null,
-  contributorData: [],
   currentPageNo: null,
   repoPageIndexStart: null,
   repoPageIndexEnd: null,
@@ -44,27 +40,6 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         ...state,
         fetching: false,
         error: action.payload,
-      };
-
-    case RepoActionTypes.FETCH_CONTRIBUTORS_PENDING:
-      return {
-        ...state,
-        cont_fetching: true,
-      };
-
-    case RepoActionTypes.FETCH_CONTRIBUTORS_FULFILLED:
-      return {
-        ...state,
-        cont_fetching: false,
-        cont_fetched: true,
-        contributorData: action.payload,
-      };
-
-    case RepoActionTypes.FETCH_CONTRIBUTORS_REJECTED:
-      return {
-        ...state,
-        cont_fetching: false,
-        cont_error: action.payload,
       };
 
     case RepoActionTypes.TOGGLE_FILTER_DROPDOWN_HIDDEN:

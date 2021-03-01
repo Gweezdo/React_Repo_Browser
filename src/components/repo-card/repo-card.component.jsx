@@ -62,34 +62,7 @@ const timeHandeler = (time) => {
     minutes,
     hours
   )}`;
-  
 }
-// async function getContributors(props) {
-//   try {
-//     const responce = await fetch(props.contributors_url);
-//     const cont_list = [];
-    
-//     if (!responce.ok) {
-//       throw Error(responce.statusText);
-//     } else {
-//       const result = await responce.json();
-//       for (var i = 0; i < result.length; i++) {
-//         var temp = result[i].login;
-//         cont_list.push(temp);
-//         // console.log(`cont${i} ${temp}`);
-//         if (i === 4) {
-//           break;
-//         }
-//       }
-//       // console.log(cont_list)
-//       return cont_list;
-//     }
-//   } catch (error) {
-//     console.log("Fetch to catalyst Contributors api errored out!");
-//   }
-// }
-
-
 
 const RepoCard = (props) => {
 
@@ -165,18 +138,21 @@ const RepoCard = (props) => {
               </div>
             </div>
           </div>
-         
-            {
-              
-              
-              
-              
-            }
-            
-            </div>
-            </div>
-            </div>
-            // <GetContributors list={getContributors(props)} />
+          <div className="contributor-stats">
+            <h6 className="contributor-title">Top Contributors:</h6>
+            <ul className="contributor-list">
+              {props.contributor_arr.length > 0
+                ? props.contributor_arr.map((cont, index) => (
+                    <li className="contr" key={index}>
+                      {cont}
+                    </li>
+                  ))
+                : "No Contributors"}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

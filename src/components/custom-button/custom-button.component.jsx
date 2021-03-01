@@ -37,5 +37,5 @@ const CustomButton = ({ className, children, ...buttonProps }) => (
   </button>
 );
 	
-	export default CustomButton;
+export default CustomButton;
 	
