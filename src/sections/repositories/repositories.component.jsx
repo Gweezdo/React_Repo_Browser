@@ -6,7 +6,7 @@ import RepoCard from "../../components/repo-card/repo-card.component";
 import "./repositories.styles.scss";
 
 //imported actions
-import { fetchReposAsync, fetchContAsync } from "../../redux/repo/repo.actions";
+import { fetchReposAsync } from "../../redux/repo/repo.actions";
 
 
 class RepoSection extends React.Component {
@@ -24,9 +24,9 @@ class RepoSection extends React.Component {
     if (prevProps.repos.sortReposByUrl !== sortReposByUrl) {
       this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl);
     }
-    if (prevProps.repos.repoData.length >1) {
-      this.props.fetchContAsync(this.props.repos.repoData);
-    }
+    // if (prevProps.repos.repoData.length >1) {
+    //   // this.props.fetchContAsync(this.props.repos.repoData);
+    // }
 
   }
 
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchReposAsync: (filterReposByUrl, sortReposByUrl) =>
     dispatch(fetchReposAsync(filterReposByUrl, sortReposByUrl)),
-  fetchContAsync: (repoData) => dispatch(fetchContAsync(repoData)),
+  // fetchContAsync: (repoData) => dispatch(fetchContAsync(repoData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoSection);

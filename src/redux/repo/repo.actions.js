@@ -3,9 +3,9 @@ import { RepoActionTypes } from './repo.types';
 
 export const fetchReposAsync = (filterReposByUrl, sortReposByUrl) => {
   return dispatch => {
-    dispatch(fetchReposPending())
-
-    const url = `https://api.github.com/orgs/catalyst/repos?page=1&per_page=30&${filterReposByUrl}&${sortReposByUrl}&access_token=78ffc5da66b7ea9369c88a2762fe9eb71c7fca1b`;
+    dispatch(fetchReposPending());
+    //access_token=78ffc5da66b7ea9369c88a2762fe9eb71c7fca1b
+    const url = `https://api.github.com/orgs/catalyst/repos?client_id=2aa40990e1a443df17b4&client_secret=a6bd18121a97d7df05f31a1734702aa2e3a8a3fd&page=1&per_page=30&${filterReposByUrl}&${sortReposByUrl}&`;
     axios
       .get(url)
       .then((res) => {
@@ -13,7 +13,7 @@ export const fetchReposAsync = (filterReposByUrl, sortReposByUrl) => {
         let results = res.data;
 
         for (var i = 0; i < results.length; i++) {
-          list.push({
+          let obj = {
             id: results[i].id,
             name: results[i].name,
             full_name: results[i].full_name,
@@ -29,11 +29,30 @@ export const fetchReposAsync = (filterReposByUrl, sortReposByUrl) => {
             forks_count: results[i].forks_count,
             license: results[i].license, // or null if no license
             open_issues: results[i].open_issues,
-        });
-      }
-      dispatch(fetchReposFulfilled(list))
-    
-    })
+            contributor_arr: [],
+          };
+
+          let cont_url = results[i].contributors_url;
+
+          axios
+            .get(cont_url)
+            .then((cont_res) => {
+              let cont_arr = cont_res.data;
+              let state_arr = [];
+              for (var j = 0; j < cont_arr.length; j++) {
+                state_arr.push(cont_arr[j].login);
+                if (j === 4) {
+                  break;
+                }
+              }
+              obj.contributor_arr = state_arr;
+
+              list.push(obj);
+            })
+            .catch((error) => console.log("This is my error " + error));
+        }
+        dispatch(fetchReposFulfilled(list));
+      })
       .catch((error) => dispatch(fetchReposRejected(error)));
   }
 };
@@ -52,45 +71,45 @@ export const fetchReposRejected = (error) => ({
   payload: error
 });
 
-export const fetchContAsync = (repoData) => {
-  return dispatch => {
-    dispatch(fetchContPending())
-    const cont_list = [];
+// export const fetchContAsync = (repoData) => {
+//   return dispatch => {
+//     dispatch(fetchContPending())
+//     const cont_list = [];
 
-    for(var i=0; i<repoData.length; i++){
+//     for(var i=0; i<repoData.length; i++){
       
-      axios
-        .get(repoData[i].contributors_url)
-        .then((res) => {
-          var temp_list = [];
-          for (var j = 0; j < res.data.length; j++) {
-            temp_list.push(res.data[j].login);
-            if (j === 4) {
-              break;
-            }
-          }
-          cont_list.push(temp_list);
-        })
-        .catch((error) => dispatch(fetchContRejected(error)));
-      }
-      dispatch(fetchContFulfilled(cont_list))
-    }
+//       axios
+//         .get(repoData[i].contributors_url)
+//         .then((res) => {
+//           var temp_list = [];
+//           for (var j = 0; j < res.data.length; j++) {
+//             temp_list.push(res.data[j].login);
+//             if (j === 4) {
+//               break;
+//             }
+//           }
+//           cont_list.push(temp_list);
+//         })
+//         .catch((error) => dispatch(fetchContRejected(error)));
+//       }
+//       dispatch(fetchContFulfilled(cont_list))
+//     }
 
-  }
+//   }
 
-export const fetchContPending = () => ({
-  type: RepoActionTypes.FETCH_CONTRIBUTORS_PENDING,
-});
+// export const fetchContPending = () => ({
+//   type: RepoActionTypes.FETCH_CONTRIBUTORS_PENDING,
+// });
 
-export const fetchContFulfilled = (data) => ({
-  type: RepoActionTypes.FETCH_CONTRIBUTORS_FULFILLED,
-  payload: data,
-});
+// export const fetchContFulfilled = (data) => ({
+//   type: RepoActionTypes.FETCH_CONTRIBUTORS_FULFILLED,
+//   payload: data,
+// });
 
-export const fetchContRejected = (error) => ({
-  type: RepoActionTypes.FETCH_CONTRIBUTORS_REJECTED,
-  payload: error,
-});
+// export const fetchContRejected = (error) => ({
+//   type: RepoActionTypes.FETCH_CONTRIBUTORS_REJECTED,
+//   payload: error,
+// });
 
 
 
