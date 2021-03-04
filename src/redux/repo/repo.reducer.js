@@ -1,14 +1,19 @@
 import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
+  repoURL:
+    "https://api.github.com/orgs/catalyst/repos?access_token=2fee951e4313e8097351121b1c994836e7ee6f5c&page=1&per_page=3",
+  
   fetching: false,
   fetched: false,
   error: null,
   repoData: [],
-  currentPageNo: null,
+  pageNoFirst: "page=1",
+  pageNoLast: null,
+  pageNoNext: null,
+  pageNoPrev: null,
   repoPageIndexStart: null,
   repoPageIndexEnd: null,
-  lastPageNo: null,
   firstButtonIsActive: false,
   lastButtonIsActive: true,
   filterReposBy: "All",
@@ -78,25 +83,28 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         sortReposByUrl: action.payload,
       };
 
-    case RepoActionTypes.FIRST_PAGE_DISPLAYED:
-      const lastPageNo = Math.ceil(state.repoData.length / 30);
+    case RepoActionTypes.FIRST_PAGE_NO:
       return {
         ...state,
-        currentPageNo: action.payload,
-        repoPageIndexStart: 0,
-        repoPageIndexEnd: 30,
-        lastPageNo: lastPageNo,
+        pageNoFirst: action.payload,
       };
 
-    case RepoActionTypes.LAST_PAGE_DISPLAYED:
-      const pageNo = state.lastPageNo;
-      const startIndex = pageNo * 30 - 1 - 30;
-      const endIndex = state.repoData.length;
+    case RepoActionTypes.LAST_PAGE_NO:
       return {
         ...state,
-        currentPageNo: pageNo,
-        repoPageIndexStart: startIndex,
-        repoPageIndexEnd: endIndex,
+        pageNoLast: action.payload,
+      };
+
+    case RepoActionTypes.NEXT_PAGE_NO:
+      return {
+        ...state,
+        pageNoNext: action.payload,
+      };
+
+    case RepoActionTypes.PREV_PAGE_NO:
+      return {
+        ...state,
+        pageNoPrev: action.payload,
       };
 
     default:

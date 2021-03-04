@@ -11,18 +11,23 @@ import { fetchReposAsync } from "../../redux/repo/repo.actions";
 
 class RepoSection extends React.Component {
   componentDidMount() {
-    const { filterReposByUrl, sortReposByUrl } = this.props.repos;
-    this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl);
+    const { filterReposByUrl, sortReposByUrl, repoURL, pageNoFirst } = this.props.repos;
+    this.props.fetchReposAsync(
+      filterReposByUrl,
+      sortReposByUrl,
+      repoURL,
+      pageNoFirst
+    );
   }
   componentDidUpdate(prevProps, prevState) {
-    const { filterReposByUrl, sortReposByUrl } = this.props.repos;
+    const { filterReposByUrl, sortReposByUrl, repoURL } = this.props.repos;
     // console.log(`PrevProps = ${prevProps.repos.filterReposByUrl}`)
     // console.log(`NewProps = ${filterReposByUrl}`)
     if(prevProps.repos.filterReposByUrl !== filterReposByUrl){
-      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl);
+      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL);
     }
     if (prevProps.repos.sortReposByUrl !== sortReposByUrl) {
-      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl);
+      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL);
     }
     // if (prevProps.repos.repoData.length >1) {
     //   // this.props.fetchContAsync(this.props.repos.repoData);
@@ -52,8 +57,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchReposAsync: (filterReposByUrl, sortReposByUrl) =>
-    dispatch(fetchReposAsync(filterReposByUrl, sortReposByUrl)),
+  fetchReposAsync: (filterReposByUrl, sortReposByUrl, repoURL) =>
+    dispatch(fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL)),
   // fetchContAsync: (repoData) => dispatch(fetchContAsync(repoData)),
 });
 

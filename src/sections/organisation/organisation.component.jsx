@@ -10,9 +10,7 @@ class OrgSection extends React.Component {
   //Fetching all organisation data
   async componentDidMount() {
     try {
-      const orgResponce = await fetch(
-        "https://api.github.com/orgs/catalyst?&access_token=26fc0562eb44eac198849d4557d9064c906607d9"
-      );
+      const orgResponce = await fetch(this.props.orgs.orgURL);
       if (!orgResponce.ok) {
         throw Error(orgResponce.statusText);
       } else {
