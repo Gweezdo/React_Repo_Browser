@@ -4,9 +4,12 @@
   background: #fbfbfb;
   border: 0.1rem solid #d9d7d8;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1), 0px 0px 4px rgba(0, 0, 0, 0.1);
+  left: calc(50% - 81.4rem/2);
+  position: relative;
+  margin: 2.0rem 0;
 
   .top-section {
-    padding: 2rem 2rem;
+    padding: 2.0rem 2.0rem;
 
     .repo-title {
       font-size: 3rem;
@@ -62,12 +65,14 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
 
         .show-info {
           position: relative;
           cursor: pointer;
           display: flex;
           height: 2rem;
+          padding-right: 2rem;
 
           .show-more-icon {
             position: relative;
@@ -85,10 +90,13 @@
       }
     }
   }
+  .repo-card-hidden{
+    // display: none;
 
-  .btm-section {
-    padding: 0rem 2rem 2rem 2rem;
-    display: none;
+  }
+
+  .bottom-section {
+    padding: 0rem 2.0rem 2.0rem 2.0rem;
 
     .line {
       position: relative;
@@ -99,6 +107,7 @@
       flex-direction: row;
       justify-content: space-between;
       padding-top: 1rem;
+      // display: none;
 
       .repo-stats {
         width: 40rem;
@@ -116,7 +125,7 @@
           justify-content: space-between;
           padding-top: 1rem;
 
-          .stats-left {
+          .stats-left, .stats-right{
             display: block;
             /* background:lightcoral; */
 
@@ -137,10 +146,30 @@
             }
 					}
 					
-					.stat-right{
-						
-					}
+					
         }
+      }
+
+      .contributor-stats {
+        width: 30rem;
+
+        .contributor-title {
+          font-size: 1.8rem;
+          line-height: 2.9rem;
+          color: #3d3c3c;
+          text-align: center;
+          // background: yellow;
+        }
+        
+        .contributor-list {
+          // background-color: blue;
+          .contr{
+            // color: red;
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+          }
+        }
+
       }
     }
   }

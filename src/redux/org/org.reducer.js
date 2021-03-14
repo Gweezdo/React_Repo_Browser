@@ -1,11 +1,13 @@
 const INITIAL_STATE = {
+  orgURL:
+    "https://api.github.com/orgs/catalyst?&access_token=52a195f7016590483ef237df410e648bbb24634b",
   id: null,
   blogUrl: null,
   orgGitUrl: null,
   orgName: null,
   orgDescription: null,
   orgLocation: null,
-	orgRepoCount: null,
+  orgRepoCount: null,
 };
 
 const orgReducer = (state = INITIAL_STATE, action) => {

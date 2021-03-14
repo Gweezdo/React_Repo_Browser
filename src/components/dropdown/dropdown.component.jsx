@@ -1,33 +1,39 @@
 import React from 'react';
 
 import { ReactComponent as FilterSortIcon } from '../../assets/filter-sort-icon_24px.svg'; 
+//imported actions
 import {
+  filterReposAsync,
+  sortReposAsync,
   toggleFilterDropdownHidden,
-  filterReposBy,
   toggleSortbyDropdownHidden,
-  sortReposBy,
 } from "../../redux/repo/repo.actions";
+
+
 import { useSelector } from "react-redux";
 import store from '../../redux/store';
 
 import './dropdown.styles.scss'
 
-const Dropdown = ({title, content, toggleHidden, type}) => {
+const Dropdown = ({
+  title,
+  content,
+  toggleHidden,
+  type,
+}) => {
   const state = useSelector((state) => state.repos);
 
   const dropdownActionDispatch = () => {
     if (type === "Filter") {
       store.dispatch(toggleFilterDropdownHidden());
-    }else if(type ==="SortBy"){
+    } else if (type === "SortBy") {
       store.dispatch(toggleSortbyDropdownHidden());
     }
-  }
+  };
 
-
-
-	return (
+  return (
     <div className="container">
-      <span>{title}</span>
+      <span className="dropdown-title">{title}</span>
       <button className="dropdown-btn" onClick={dropdownActionDispatch}>
         <span>
           {type === "Filter"
@@ -42,15 +48,14 @@ const Dropdown = ({title, content, toggleHidden, type}) => {
         <div className="dropdown-content">
           {content.map((item, index) => (
             <span
+              key={index}
               className="item"
-              id={index}
               onClick={() => {
                 if (type === "Filter") {
-                  store.dispatch(filterReposBy(item));
-                  store.dispatch(toggleFilterDropdownHidden());
+                  store.dispatch(filterReposAsync(item));
+
                 } else if (type === "SortBy") {
-                  store.dispatch(sortReposBy(item));
-                  store.dispatch(toggleSortbyDropdownHidden());
+                  store.dispatch(sortReposAsync(item));
                 }
               }}
             >
@@ -61,6 +66,7 @@ const Dropdown = ({title, content, toggleHidden, type}) => {
       ) : null}
     </div>
   );
-}
+};
 
 export default Dropdown;
+
