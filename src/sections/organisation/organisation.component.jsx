@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchedOrgData } from "../../redux/org/org.actions";
-// import { toggleFilterDropdownHidden } from '../../redux/repo/repo.actions';
 import Dropdown from "../../components/dropdown/dropdown.component";
 
 import "./organisation.styles.scss";
@@ -15,7 +14,6 @@ class OrgSection extends React.Component {
         throw Error(orgResponce.statusText);
       } else {
         const orgInfo = await orgResponce.json();
-        // console.log("orgInfo.headers: " + orgInfo.headers);
         console.log("orgInfo fetched");
         this.props.fetchedOrgData(orgInfo);
       }
@@ -26,6 +24,11 @@ class OrgSection extends React.Component {
 
   render() {
     const {
+      pageNoFirst,
+      pageNoLast,
+      pageNoNext,
+      pageNoPrev,
+      pageNoCurrent,
       filterHidden,
       sortbyHidden,
     } = this.props.repos;
@@ -60,8 +63,16 @@ class OrgSection extends React.Component {
               ]}
               toggleHidden={sortbyHidden}
               type={"SortBy"}
+
             ></Dropdown>
           </div>
+        </div>
+        <div className="page-numbers">
+          <div>First {pageNoFirst}</div>
+          <div>Prev {pageNoPrev}</div>
+          <div>Current {pageNoCurrent}</div>
+          <div>Next {pageNoNext}</div>
+          <div>Last {pageNoLast}</div>
         </div>
       </div>
     );

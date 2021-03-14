@@ -12,8 +12,7 @@ import { ReactComponent as IssueIcon } from "../../assets/issues-icon_20px.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/calendar-icon_20px.svg";
 
 import CustomButton from '../../components/custom-button/custom-button.component';
-// import GetContributors from '../../components/contributors/contributors.component';
-// import { useSelector } from "react-redux";
+
 
 const licenseHandeler = (props) => {
   if(props.license === null){
@@ -57,7 +56,6 @@ const timeHandeler = (time) => {
   var minutes = date.getMinutes();
   var hours = date.getHours();
 
-  // console.log(`Updated: ${day.toString()}/${month.toString()}/${year.toString()} ${minsOrHrs(minutes, hours)}`);
   return ` ${day.toString()}/${month.toString()}/${year.toString()} ${minsOrHrs(
     minutes,
     hours
@@ -83,15 +81,29 @@ const RepoCard = (props) => {
             </div>
           </div>
           <div className="btm-right-container">
-            <div className="show-info">
+            <div
+              className="show-info"
+              onClick={() => console.log(`clicked: ${props.index}`)}
+            >
               <ShowMoreIcon className="show-more-icon" />
               <span className="show-text">Show more</span>
             </div>
-            <CustomButton className="repo-btn">VIEW</CustomButton>
+            <CustomButton
+              className="repo-btn"
+              onClick={() => window.open(props.html_url, "_blank")}
+            >
+              VIEW
+            </CustomButton>
           </div>
         </div>
       </div>
-      <div className="bottom-section">
+      <div
+        className={
+          props.repoCardHidden
+            ? `bottom-section repo-card-hidden`
+            : `bottom-section`
+        }
+      >
         <hr className="line" />
         <div className="repo-info-container">
           <div className="repo-stats">
@@ -155,7 +167,5 @@ const RepoCard = (props) => {
     </div>
   );
 };
-
-
 
 export default RepoCard;

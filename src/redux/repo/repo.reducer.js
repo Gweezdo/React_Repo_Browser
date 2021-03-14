@@ -2,19 +2,21 @@ import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
   repoURL:
-    "https://api.github.com/orgs/catalyst/repos?access_token=2fee951e4313e8097351121b1c994836e7ee6f5c&page=1&per_page=3",
-  
+    "https://api.github.com/orgs/catalyst/repos?&access_token=52a195f7016590483ef237df410e648bbb24634b&per_page=3",
+
   fetching: false,
   fetched: false,
+  hasFetched: false,
   error: null,
   repoData: [],
   pageNoFirst: "page=1",
   pageNoLast: null,
   pageNoNext: null,
   pageNoPrev: null,
-  repoPageIndexStart: null,
-  repoPageIndexEnd: null,
+  pageNoCurrent: "page=1",
   firstButtonIsActive: false,
+  prevButtonIsActive: false,
+  nextButtonIsActive: true,
   lastButtonIsActive: true,
   filterReposBy: "All",
   filterReposByUrl: "all",
@@ -22,6 +24,7 @@ const INITIAL_STATE = {
   sortReposByUrl: "sort=created&direction=desc",
   filterHidden: false,
   sortbyHidden: false,
+  index: 0,
 };
 
 const repoReducer = (state = INITIAL_STATE, action) => {
@@ -35,9 +38,9 @@ const repoReducer = (state = INITIAL_STATE, action) => {
     case RepoActionTypes.FETCH_REPOS_FULFILLED:
       return {
         ...state,
+        repoData: action.payload,
         fetching: false,
         fetched: true,
-        repoData: action.payload,
       };
 
     case RepoActionTypes.FETCH_REPOS_REJECTED:
@@ -52,6 +55,12 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         ...state,
         filterHidden: !state.filterHidden,
       };
+
+    case RepoActionTypes.HAS_FETCHED:
+      return {
+        ...state,
+        hasFetched: action.payload,
+      }  
 
     case RepoActionTypes.TOGGLE_SORTBY_DROPDOWN_HIDDEN:
       return {
@@ -106,6 +115,44 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         ...state,
         pageNoPrev: action.payload,
       };
+
+    case RepoActionTypes.CURRENT_PAGE_NO:
+      return {
+        ...state,
+        pageNoCurrent: action.payload,
+      };
+
+    case RepoActionTypes.FIRST_BTN_ACTIVE:
+      return {
+        ...state,
+        firstButtonIsActive: action.payload,
+      };
+
+    case RepoActionTypes.PREV_BTN_ACTIVE:
+      return {
+        ...state,
+        prevButtonIsActive: action.payload,
+      };
+
+    case RepoActionTypes.NEXT_BTN_ACTIVE:
+      return {
+        ...state,
+        nextButtonIsActive: action.payload,
+      };
+
+    case RepoActionTypes.LAST_BTN_ACTIVE:
+      return {
+        ...state,
+        lastButtonIsActive: action.payload,
+      };
+
+    // case RepoActionTypes.TOGGLE_REPO_CARD_HIDDEN:
+    //   let index = action.payload
+    //   var hidden = state.repoData[index].repoCardHidden
+    //   return {
+    //     ...state,
+    //     hidden: !hidden,
+    //   };
 
     default:
       return state;

@@ -13,39 +13,55 @@ class RepoSection extends React.Component {
   componentDidMount() {
     const { filterReposByUrl, sortReposByUrl, repoURL, pageNoFirst } = this.props.repos;
     this.props.fetchReposAsync(
+      repoURL,
+      pageNoFirst,
       filterReposByUrl,
       sortReposByUrl,
-      repoURL,
-      pageNoFirst
     );
   }
   componentDidUpdate(prevProps, prevState) {
-    const { filterReposByUrl, sortReposByUrl, repoURL } = this.props.repos;
-    // console.log(`PrevProps = ${prevProps.repos.filterReposByUrl}`)
-    // console.log(`NewProps = ${filterReposByUrl}`)
+    const {
+      filterReposByUrl,
+      sortReposByUrl,
+      repoURL,
+      pageNoFirst,
+    } = this.props.repos;
+    
     if(prevProps.repos.filterReposByUrl !== filterReposByUrl){
-      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL);
+      console.log(prevProps.repos.filterReposByUrl);
+      console.log(filterReposByUrl);
+      this.props.fetchReposAsync(
+        repoURL,
+        pageNoFirst,
+        filterReposByUrl,
+        sortReposByUrl
+      );
     }
     if (prevProps.repos.sortReposByUrl !== sortReposByUrl) {
-      this.props.fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL);
+      console.log(prevProps.repos.sortReposByUrl);
+      this.props.fetchReposAsync(
+        repoURL,
+        pageNoFirst,
+        filterReposByUrl,
+        sortReposByUrl
+      );
     }
-    // if (prevProps.repos.repoData.length >1) {
-    //   // this.props.fetchContAsync(this.props.repos.repoData);
-    // }
-
   }
 
   render() {
-    const { repoData } = this.props.repos;
+    console.log("repositories.component render()")
+    const { repoData, hasFetched } = this.props.repos;
+
 
     return (
       <div className="repo-section">
-        {repoData.map((repo) => (
-          <RepoCard
-            key={repo.id}
-            {...repo}
-          />
-        ))}
+        {hasFetched ? (
+          repoData.map((repo, index) => (
+            <RepoCard key={repo.id} index={index} {...repo} />
+          ))
+        ) : (
+          <div className="loading-animation">LOADING</div>
+        )}
       </div>
     );
   }
@@ -57,9 +73,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchReposAsync: (filterReposByUrl, sortReposByUrl, repoURL) =>
-    dispatch(fetchReposAsync(filterReposByUrl, sortReposByUrl, repoURL)),
-  // fetchContAsync: (repoData) => dispatch(fetchContAsync(repoData)),
+  fetchReposAsync: (repoURL, pageNo, filterReposByUrl, sortReposByUrl) =>
+    dispatch(
+      fetchReposAsync(repoURL, pageNo, filterReposByUrl, sortReposByUrl)
+    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoSection);

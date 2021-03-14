@@ -32,6 +32,7 @@
 		// top: calc(50% - 2.4rem/2);
     // padding: 0 0.5rem 0 0;
 	}
+
 	
 	&.nav-btn{
 		color: #282828;
@@ -40,6 +41,10 @@
 		background: #f1f1f1;
 		// background: #646464;
 		padding: 0 1.0rem 0 1.5rem;
+		
+		&.nav-disabled{
+			background-color: #BB2025;
+		}
 		
 		&.nav-btn-first{
 			
@@ -52,6 +57,10 @@
 
 		&.nav-btn-next, &.nav-btn-last{
 			flex-direction: row-reverse;
+		}
+		
+		&:hover{
+			background: rgba(0,0,0,0.2);
 		}
 	}
 	

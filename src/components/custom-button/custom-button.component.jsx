@@ -29,8 +29,8 @@ const iconToRender = (icon) => {
 
 const CustomButton = ({ className, children, ...buttonProps }) => (
   <button
-		className={`${className} custom-button`}
-		{...buttonProps}
+    className={`${className} custom-button`}
+    {...buttonProps}
   >
     {iconToRender(className)}
     {children}
