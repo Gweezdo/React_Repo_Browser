@@ -74,13 +74,38 @@
           height: 2rem;
           padding-right: 2rem;
 
-          .show-more-icon {
-            position: relative;
-            width: 2rem;
-            height: 2rem;
-            transform: rotate(0deg);
-            /* background: red; */
+          .show-less{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .show-less-icon {
+              position: relative;
+              width: 2rem;
+              height: 2rem;
+              transform: rotate(180deg);
+              /* background: red; */
+            }
+            
           }
+
+          .show-more{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            
+            .show-more-icon {
+              position: relative;
+              // top: 1rem;
+              width: 2rem;
+              height: 2rem;
+              transform: rotate(0deg);
+              /* background: red; */
+            }
+          }
+
 
           .show-text {
             font-size: 1.4rem;
@@ -91,7 +116,7 @@
     }
   }
   .repo-card-hidden{
-    // display: none;
+    display: none;
 
   }
 

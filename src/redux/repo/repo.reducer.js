@@ -2,13 +2,14 @@ import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
   repoURL:
-    "https://api.github.com/orgs/catalyst/repos?&access_token=52a195f7016590483ef237df410e648bbb24634b&per_page=3",
+    "https://api.github.com/orgs/catalyst/repos?&access_token=61b5c343bbeba909441efe4160a6c679d32e69f3&per_page=3",
 
   fetching: false,
   fetched: false,
   hasFetched: false,
   error: null,
   repoData: [],
+  showArr: [],
   pageNoFirst: "page=1",
   pageNoLast: null,
   pageNoNext: null,
@@ -50,17 +51,29 @@ const repoReducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
       };
 
+    case RepoActionTypes.UPDATE_SHOW_ARR:
+      return {
+        ...state,
+        showArr: action.payload,
+      };
+
     case RepoActionTypes.TOGGLE_FILTER_DROPDOWN_HIDDEN:
       return {
         ...state,
         filterHidden: !state.filterHidden,
       };
 
+    case RepoActionTypes.TOGGLE_SHOW_ARR:
+      return {
+        ...state,
+        showArr: action.payload,
+      };
+
     case RepoActionTypes.HAS_FETCHED:
       return {
         ...state,
         hasFetched: action.payload,
-      }  
+      };
 
     case RepoActionTypes.TOGGLE_SORTBY_DROPDOWN_HIDDEN:
       return {

@@ -63,6 +63,7 @@ export const fetchReposAsync = (repoURL, pageNo, filterReposByUrl, sortReposByUr
       .get(url)
       .then((res) => {
         let list = [];
+        let showArr = [];
         let results = res.data;
         let headers = res.headers.link;
         dispatch(getHeaders(headers));
@@ -105,11 +106,13 @@ export const fetchReposAsync = (repoURL, pageNo, filterReposByUrl, sortReposByUr
               obj.contributor_arr = state_arr;
 
               list.push(obj);
+              showArr.push(false);
             })
             .catch((error) => console.log("This is my error " + error));
         }
         
         dispatch(fetchReposFulfilled(list));
+        dispatch(updateShowArr(showArr))
         setTimeout(() => {
           dispatch(hasFetched(true));
         }, 500);
@@ -149,8 +152,18 @@ export const fetchReposRejected = (error) => ({
   payload: error
 });
 
+export const updateShowArr = (boolArr) => ({
+  type: RepoActionTypes.UPDATE_SHOW_ARR,
+  payload: boolArr,
+});
+
 export const toggleFilterDropdownHidden = () => ({
   type: RepoActionTypes.TOGGLE_FILTER_DROPDOWN_HIDDEN,
+});
+
+export const toggleShowArr = (arr) => ({
+  type: RepoActionTypes.TOGGLE_SHOW_ARR,
+  payload: arr,
 });
 
 export const filterReposBy = (item) => ({

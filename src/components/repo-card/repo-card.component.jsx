@@ -13,6 +13,9 @@ import { ReactComponent as CalendarIcon } from "../../assets/calendar-icon_20px.
 
 import CustomButton from '../../components/custom-button/custom-button.component';
 
+import { toggleShowArr } from '../../redux/repo/repo.actions';
+import { useSelector } from "react-redux";
+import store from "../../redux/store";
 
 const licenseHandeler = (props) => {
   if(props.license === null){
@@ -63,7 +66,7 @@ const timeHandeler = (time) => {
 }
 
 const RepoCard = (props) => {
-
+const state = useSelector((state) => state.repos);
   return (
     <div className="repo-card">
       <div className="top-section">
@@ -81,12 +84,29 @@ const RepoCard = (props) => {
             </div>
           </div>
           <div className="btm-right-container">
-            <div
-              className="show-info"
-              onClick={() => console.log(`clicked: ${props.index}`)}
-            >
-              <ShowMoreIcon className="show-more-icon" />
-              <span className="show-text">Show more</span>
+            <div>
+              <div
+                className="show-info"
+                onClick={() => {
+                  const newArr = state.showArr.slice();
+                  newArr[props.index] = !state.showArr[props.index];
+                  console.log(`clicked: ${props.index}`);
+                  console.log(newArr);
+                  store.dispatch(toggleShowArr(newArr));
+                }}
+              >
+                {state.showArr[props.index] ? (
+                  <div className="show-less">
+                    <ShowMoreIcon className="show-less-icon"></ShowMoreIcon>
+                    <span className="show-text">Show Less</span>
+                  </div>
+                ) : (
+                  <div className="show-more">
+                    <ShowMoreIcon className="show-more-icon"></ShowMoreIcon>
+                    <span className="show-text">Show More</span>
+                  </div>
+                )}
+              </div>
             </div>
             <CustomButton
               className="repo-btn"
@@ -99,9 +119,9 @@ const RepoCard = (props) => {
       </div>
       <div
         className={
-          props.repoCardHidden
-            ? `bottom-section repo-card-hidden`
-            : `bottom-section`
+          state.showArr[props.index]
+            ? `bottom-section`
+            : `bottom-section repo-card-hidden`
         }
       >
         <hr className="line" />

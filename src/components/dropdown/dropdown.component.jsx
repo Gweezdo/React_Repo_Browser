@@ -31,10 +31,16 @@ const Dropdown = ({
     }
   };
 
+
+
   return (
     <div className="container">
       <span className="dropdown-title">{title}</span>
-      <button className="dropdown-btn" onClick={dropdownActionDispatch}>
+      <button
+        className="dropdown-btn"
+        onClick={dropdownActionDispatch}
+        // onBlur={dropdownActionDispatch}
+      >
         <span>
           {type === "Filter"
             ? state.filterReposBy
@@ -53,7 +59,6 @@ const Dropdown = ({
               onClick={() => {
                 if (type === "Filter") {
                   store.dispatch(filterReposAsync(item));
-
                 } else if (type === "SortBy") {
                   store.dispatch(sortReposAsync(item));
                 }
