@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
   orgURL:
-    "https://api.github.com/orgs/catalyst?&access_token=61b5c343bbeba909441efe4160a6c679d32e69f3",
+    "https://api.github.com/orgs/catalyst",
   id: null,
   blogUrl: null,
   orgGitUrl: null,

@@ -67,14 +67,14 @@ class OrgSection extends React.Component {
             ></Dropdown>
           </div>
         </div>
-        <div className="page-numbers">
-          <div>First {pageNoFirst}</div>
-          <div>Prev {pageNoPrev}</div>
-          <div>Current {pageNoCurrent}</div>
-          <div>Next {pageNoNext}</div>
-          <div>Last {pageNoLast}</div>
         </div>
-      </div>
+        // <div className="page-numbers">
+        //   <div>First {pageNoFirst}</div>
+        //   <div>Prev {pageNoPrev}</div>
+        //   <div>Current {pageNoCurrent}</div>
+        //   <div>Next {pageNoNext}</div>
+        //   <div>Last {pageNoLast}</div>
+        // </div>
     );
   }
 }

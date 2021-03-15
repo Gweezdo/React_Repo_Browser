@@ -2,7 +2,7 @@ import { RepoActionTypes } from "./repo.types";
 
 const INITIAL_STATE = {
   repoURL:
-    "https://api.github.com/orgs/catalyst/repos?&access_token=61b5c343bbeba909441efe4160a6c679d32e69f3&per_page=3",
+    "https://api.github.com/orgs/catalyst/repos?&per_page=15",
 
   fetching: false,
   fetched: false,
