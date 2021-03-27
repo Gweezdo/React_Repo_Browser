@@ -24,11 +24,11 @@ class OrgSection extends React.Component {
 
   render() {
     const {
-      pageNoFirst,
-      pageNoLast,
-      pageNoNext,
-      pageNoPrev,
-      pageNoCurrent,
+      // pageNoFirst,
+      // pageNoLast,
+      // pageNoNext,
+      // pageNoPrev,
+      // pageNoCurrent,
       filterHidden,
       sortbyHidden,
     } = this.props.repos;
